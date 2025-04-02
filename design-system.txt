@@ -1,0 +1,229 @@
+# NepDent Attendee App Design System
+## Event Name: Dental Trade Show 2025
+## Event Location: Kathmandu, Nepal
+## Event Date: April 18-20, 2025
+
+## Use mobile first design approach
+
+## Color Palette
+- Primary: Blue shades
+  - primary-50: Light blue background
+  - primary-100: Light blue for icons backgrounds
+  - primary-300: Hover state for links in header
+  - primary-600: Main brand color, header background, button background
+  - primary-700: Button hover states, text on white backgrounds
+  - primary-800: Gradient endpoint for CTA sections
+
+- Secondary: Neutral/Gray shades 
+  - secondary-50: Light background for sections
+  - secondary-100: Border colors, very light backgrounds
+  - secondary-200: Border colors for maps/content containers
+  - secondary-300: Border color for secondary buttons
+  - secondary-600: Body text, secondary text
+  - secondary-700: Stronger text, testimonial text
+  - secondary-900: Headings, important text
+
+- Accent: Purple/Teal shades
+  - accent-50: Very light accent backgrounds
+  - accent-100: Decorative elements background
+  - accent-500: Feature card background
+  - accent-600: Accent text, hover states
+  - accent-700: Badge text
+
+- Success: Green
+  - success: Feature card background (green)
+
+## Typography
+- Font Families:
+  - font-display: For headings and display text (likely a distinctive, brand font)
+  - Default system font: For body text
+
+- Text Sizes:
+  - text-sm: Small text (badges)
+  - Base (default): Regular body text
+  - text-lg: Larger body text, buttons
+  - text-xl: Sub-headings, feature titles
+  - text-2xl: Logo text
+  - text-3xl: Section headings
+  - text-4xl: Stats, icons
+  - text-5xl/text-6xl: Hero headings
+
+- Font Weights:
+  - font-medium: Buttons, emphasis
+  - font-semibold: Sub-headings, labels
+  - font-bold: Headings, important text
+
+## Spacing
+- Containers:
+  - max-w-7xl: Main content container
+  - max-w-5xl: For specific sections like countdown timer
+  - max-w-4xl: For focused content like CTA
+  - max-w-2xl: For centered paragraphs
+
+- Padding:
+  - px-4 sm:px-6 lg:px-8: Responsive horizontal padding
+  - py-3/py-4: Small vertical padding (buttons, small elements)
+  - py-8: Medium vertical padding (sections)
+  - py-12/py-16: Large vertical padding (major sections)
+
+- Gaps:
+  - gap-3/gap-4: Small gaps
+  - gap-6/gap-8: Medium gaps
+  - gap-12: Large gaps
+
+## UI Components
+
+### Buttons
+1. Primary Button:
+   - Classes: bg-primary-600 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-primary-700 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300
+   - With icon: inline-flex items-center with SVG
+
+2. Secondary Button:
+   - Classes: border-2 border-primary-600 text-primary-700 px-6 py-3 rounded-xl hover:bg-primary-50 transition-colors duration-300
+
+3. Section/Outline Button:
+   - Classes: border border-secondary-300 rounded-xl text-secondary-700 hover:bg-secondary-100 transition-colors
+
+4. CTA White Button:
+   - Classes: bg-white text-primary-700 px-8 py-4 rounded-xl shadow-lg hover:bg-primary-50 transition-colors
+
+### Cards
+1. Standard Card:
+   - Classes: bg-white rounded-xl shadow-card hover:shadow-xl transition-all duration-300
+   - Optional: border border-secondary-100
+
+2. Feature Card:
+   - Top color section with icon
+   - Content section with heading, text, and link
+   - Hover states for entire card
+
+3. Speaker Card:
+   - Image with gradient overlay
+   - Text positioned at bottom
+   - Hover effect on image (scale)
+
+4. Testimonial Card:
+   - Quote styling
+   - Attribution section
+
+### Toast Notifications
+- Global toast container initialized in App.jsx for app-wide notifications
+- Position: top-right
+- Duration: 
+  - Default: 3000ms
+  - Success: 2000ms
+  - Error: 4000ms
+- Styling:
+  - Default: Dark gray background (#363636)
+  - Success: Green background (#4ade80)
+  - Error: Red background (#f87171)
+  - Loading: Blue background (#60a5fa)
+- Usage: Import toast from 'react-hot-toast' in any component to trigger notifications
+  - toast.success('Success message')
+  - toast.error('Error message')
+  - toast.loading('Loading message')
+
+### Decorative Elements
+- Gradient backgrounds: bg-gradient-to-br from-primary-50 to-secondary-100
+- Blur elements: absolute positioned divs with blur-3xl and opacity classes
+- Card shadows: shadow-card, shadow-lg, shadow-xl
+- Hover animations: transform hover:-translate-y-1, transition-all duration-300
+- Border accents: border border-secondary-100
+
+## Layout Patterns
+- Hero section: Two-column grid with content and image
+- Stats section: Four-column grid of stat cards
+- Features: Three-column grid of feature cards
+- Speakers: Three-column grid of speaker cards
+- Testimonials: Two-column grid
+- Event details: Two-column with text and map
+
+## Responsive Design
+- Mobile-first approach
+- Grid columns adjust based on screen size
+  - Single column on mobile
+  - Multiple columns on larger screens (md:grid-cols-2, lg:grid-cols-3, etc.)
+- Padding adjusts with breakpoints: px-4 sm:px-6 lg:px-8
+
+## Tailwind Config Reference
+This design system should be implemented in tailwind.config.js with:
+
+```js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#e6f1fe', // Light blue background
+          100: '#cce3fc', // Light blue for icons backgrounds
+          300: '#7fb3f5', // Hover state for links
+          600: '#2563eb', // Main brand color
+          700: '#1d4ed8', // Button hover states
+          800: '#1e40af', // Gradient endpoint for CTA
+        },
+        secondary: {
+          50: '#f8fafc',  // Light background
+          100: '#f1f5f9', // Border colors, light backgrounds
+          200: '#e2e8f0', // Border colors for maps
+          300: '#cbd5e1', // Border color for buttons
+          600: '#475569', // Body text
+          700: '#334155', // Stronger text
+          900: '#0f172a', // Headings
+        },
+        accent: {
+          50: '#f5f3ff',  // Very light accent backgrounds
+          100: '#ede9fe', // Decorative elements
+          500: '#8b5cf6', // Feature card backgrounds
+          600: '#7c3aed', // Accent text
+          700: '#6d28d9', // Badge text
+        },
+        success: '#22c55e', // Green for success elements
+      },
+      fontFamily: {
+        display: ['Your-Display-Font', 'sans-serif'], // Replace with actual font
+        // Add other font families as needed
+      },
+      boxShadow: {
+        card: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
+      },
+      borderRadius: {
+        'xl': '0.75rem',
+        '2xl': '1rem',
+        '3xl': '1.5rem',
+      },
+    },
+  },
+  plugins: [],
+}
+```
+
+## Usage Guidelines
+
+### When to Use What Colors
+- Primary colors: Main actions, headers, key interactive elements
+- Secondary colors: Text, borders, backgrounds, supporting elements
+- Accent colors: Highlighting information, secondary actions, visual interest
+- Success colors: Positive actions, confirmation messages
+
+### Typography Hierarchy
+- H1: text-5xl/text-6xl font-bold font-display (page titles)
+- H2: text-3xl font-bold font-display (section headings)
+- H3: text-xl font-bold (card headings)
+- Body: Base size, text-secondary-600
+- Small text: text-sm
+
+### Spacing Consistency
+- Use consistent spacing scale (multiples of 4)
+- Maintain proper hierarchy with spacing
+  - More important sections get more padding
+  - Related items have smaller gaps
+  - Unrelated sections have larger gaps
+
+### Animation Guidelines
+- Keep animations subtle and purposeful
+- Use transition-all duration-300 for general transitions
+- Add hover:-translate-y-1 for buttons and cards to give depth
+- Use hover:scale-105 for image zooms
+
+
+Use react-hot-toast for toasts

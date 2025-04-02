@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Print styles */
+@media print {
+  /* Hide unnecessary elements when printing */
+  header, 
+  nav, 
+  footer, 
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Reset background and shadows for printing */
+  body {
+    background: white !important;
+  }
+
+  /* Ensure the badge content fills the page nicely */
+  .print\:shadow-none {
+    box-shadow: none !important;
+  }
+
+  /* Center the content on the printed page */
+  .max-w-4xl {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Ensure good contrast for printed text */
+  .text-secondary-600 {
+    color: #333 !important;
+  }
+
+  .text-secondary-900 {
+    color: #000 !important;
+  }
+}

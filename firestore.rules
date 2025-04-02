@@ -1,0 +1,46 @@
+rules_version = "2";
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow public read access to admin setup status
+    match /admin/setup {
+      allow read: if true;
+      allow write: if !exists(/databases/$(database)/documents/admin/setup);
+    }
+    
+    // Allow authenticated admin to read/write all content
+    match /{document=**} {
+      allow read, write: if request.auth != null && 
+        exists(/databases/$(database)/documents/admin/setup) &&
+        get(/databases/$(database)/documents/admin/setup).data.email == request.auth.token.email;
+    }
+    
+    // Allow users collection write for registration
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow create: if true;
+      allow update, delete: if false;
+    }
+    
+    // Allow content collection to be read by anyone
+    match /content/{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+        exists(/databases/$(database)/documents/admin/setup) &&
+        get(/databases/$(database)/documents/admin/setup).data.email == request.auth.token.email;
+    }
+    
+    // Allow settings collection to be read by anyone
+    match /settings/{document} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+        exists(/databases/$(database)/documents/admin/setup) &&
+        get(/databases/$(database)/documents/admin/setup).data.email == request.auth.token.email;
+    }
+    
+    // Allow notifications collection to be read by admin and written by system
+    match /notifications/{notificationId} {
+      allow read: if request.auth != null && request.auth.token.admin == true;
+      allow write: if true; // Allow system to create notifications
+    }
+  }
+}
